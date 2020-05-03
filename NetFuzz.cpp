@@ -18,7 +18,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <queue>
-#include "Argparse/Argparse.h" // https://github.com/jamolnng/argparse
+#include "Argparse/argparse.h" // https://github.com/jamolnng/argparse
 #include "ENet/enet.h" // https://github.com/nxrighthere/ENet-CSharp
 #include <conio.h>
 #include <Windows.h>
