@@ -82,8 +82,8 @@ void Line(int16_t line) {
 	SetConsoleCursorPosition(consoleHandle, coord);
 }
 
-uint8_t* Random(uint8_t* buffer) {
-	for (int32_t i = 0; i < 1 + rand() % sizeof(buffer); i++) {
+uint8_t* Random(uint8_t* buffer, uint16_t length) {
+	for (int32_t i = 0; i < 1 + rand() % length; i++) {
 		buffer[i] = rand() % 256;
 	}
 
@@ -209,7 +209,7 @@ void Server(void* main) {
 
 							enet_peer_disconnect(event.peer, 0);
 						} else {
-							ENetPacket* packet = enet_packet_create(Random(data), sizeof(data), ENET_PACKET_FLAG_RELIABLE);
+							ENetPacket* packet = enet_packet_create(Random(data, sizeof(data)), sizeof(data), ENET_PACKET_FLAG_RELIABLE);
 
 							enet_peer_send(event.peer, 1, packet);
 						}
@@ -229,7 +229,7 @@ void Server(void* main) {
 						enet_packet_destroy(event.packet);
 
 						if (clientsMessagesCount < clientsCount * NET_FUZZING_MESSAGES_ITERATIONS * 2) {
-							ENetPacket* packet = enet_packet_create(Random(data), sizeof(data), ENET_PACKET_FLAG_RELIABLE);
+							ENetPacket* packet = enet_packet_create(Random(data, sizeof(data)), sizeof(data), ENET_PACKET_FLAG_RELIABLE);
 
 							enet_peer_send(event.peer, 1, packet);
 						} else {
@@ -324,7 +324,7 @@ void Client(void* main) {
 
 						enet_packet_destroy(event.packet);
 
-						ENetPacket* packet = enet_packet_create(Random(data), sizeof(data), ENET_PACKET_FLAG_RELIABLE);
+						ENetPacket* packet = enet_packet_create(Random(data, sizeof(data)), sizeof(data), ENET_PACKET_FLAG_RELIABLE);
 
 						enet_peer_send(peer, 1, packet);
 
