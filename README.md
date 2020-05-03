@@ -1,2 +1,2 @@
 # NetFuzz
-Fiber-based networking fuzzer for testing the reliable UDP transports
+NetFuzz is a fiber-based networking fuzzer for testing the reliable UDP transports. The application was created for stress testing and debugging a proprietary networking library, but it also supports [ENet](https://github.com/nxrighthere/ENet-CSharp) as an open-source alternative. It exploits green concurrency to simulate connections under various conditions but preserving order of execution.
