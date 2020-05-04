@@ -91,12 +91,15 @@ uint8_t* Random(uint8_t* buffer, uint16_t length) {
 }
 
 void Supervisor(void* main) {
+	int32_t phase = 0;
+
 	std::cout << std::endl;
+	phase++;
 
 	while (true) {
-		Line(initialLine + 1);
+		Line(initialLine + phase);
 
-		std::cout << "Phase 1: Spawning (" << clientsSpawnedCount << "/" << clientsCount << ")" << std::endl;
+		std::cout << "Phase " << phase << ": Spawning (" << clientsSpawnedCount << "/" << clientsCount << ")" << std::endl;
 
 		if (clientsSpawnedCount == clientsCount)
 			break;
@@ -108,11 +111,12 @@ void Supervisor(void* main) {
 	}
 
 	std::cout << std::endl;
+	phase++;
 
 	while (true) {
-		Line(initialLine + 2);
+		Line(initialLine + phase);
 
-		std::cout << "Phase 2: Connections (" << clientsDisconnectionIterationsCount << "/" << NET_FUZZING_CONNECTIONS_ITERATIONS << ")" << std::endl;
+		std::cout << "Phase " << phase << ": Connections (" << clientsDisconnectionIterationsCount << "/" << NET_FUZZING_CONNECTIONS_ITERATIONS << ")" << std::endl;
 
 		if (clientsConnectedCount == clientsCount && clientsConnectionIterationsCount == NET_FUZZING_CONNECTIONS_ITERATIONS && clientsDisconnectionIterationsCount == NET_FUZZING_CONNECTIONS_ITERATIONS)
 			break;
@@ -124,11 +128,12 @@ void Supervisor(void* main) {
 	}
 
 	std::cout << std::endl;
+	phase++;
 
 	while (true) {
-		Line(initialLine + 3);
+		Line(initialLine + phase);
 
-		std::cout << "Phase 3: Transmission (" << clientsMessagesCount << "/" << clientsCount * NET_FUZZING_MESSAGES_ITERATIONS * 2 << ")" << std::endl;
+		std::cout << "Phase " << phase << ": Transmission (" << clientsMessagesCount << "/" << clientsCount * NET_FUZZING_MESSAGES_ITERATIONS * 2 << ")" << std::endl;
 
 		if (clientsMessagesCount == clientsCount * NET_FUZZING_MESSAGES_ITERATIONS * 2)
 			break;
@@ -140,11 +145,12 @@ void Supervisor(void* main) {
 	}
 
 	std::cout << std::endl;
+	phase++;
 
 	while (true) {
-		Line(initialLine + 4);
+		Line(initialLine + phase);
 
-		std::cout << "Phase 4: Disconnections (" << clientDisconnectedCount << "/" << clientsCount << ")" << std::endl;
+		std::cout << "Phase " << phase << ": Disconnections (" << clientDisconnectedCount << "/" << clientsCount << ")" << std::endl;
 
 		if (clientDisconnectedCount == clientsCount)
 			break;
